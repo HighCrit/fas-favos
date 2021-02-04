@@ -1,0 +1,23 @@
+{
+  "name": "fas-favos",
+  "version": "1.0.0",
+  "description": "File Archiving Solution - For A Variety Of Services",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HighCrit/fas-favos.git"
+  },
+  "author": "HighCrit",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/HighCrit/fas-favos/issues"
+  },
+  "homepage": "https://github.com/HighCrit/fas-favos#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "uuid": "^8.3.2"
+  }
+}
