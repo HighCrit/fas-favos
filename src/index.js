@@ -33,9 +33,6 @@ const db = new Database(process.env.DB_PATH, async (err) => {
 
 const server = express();
 
-server.use(express.static(process.env.FILES_ROOT));
-server.use(express.json());
-
 const routes = readdirSync(join(__dirname, 'routes'));
 routes.forEach(route => {
     const r = require(join(__dirname, 'routes', route));

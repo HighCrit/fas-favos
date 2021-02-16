@@ -1,7 +1,9 @@
 const consola = require('consola');
-const { Database, OPEN_READWRITE }= require('sqlite3');
+const { Database, OPEN_READWRITE } = require('sqlite3');
+const { join } = require('path');
 const { hasMasterToken } = require('../middlewares/hasMasterToken');
 const { Response } = require('../objects/response/Response');
+const { rmdir } = require('../utils/rmdir');
 const { close } = require('../utils/close');
 
 module.exports = {
@@ -22,6 +24,7 @@ module.exports = {
                     res.status(500).json(new Response(false, 'Failed to delete service'));
                 } else if (this.changes) {
                     consola.success('Successfully deleted service with name: ' + req.params.service);
+                    rmdir(join(process.cwd(), process.env.FILES_ROOT, req.params.service));
                     res.status(204).end();
                 } else {
                     consola.warn('No service found with name: ' + req.params.service);

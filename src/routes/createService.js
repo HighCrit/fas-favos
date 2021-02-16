@@ -1,5 +1,6 @@
 const consola = require('consola');
-const { Database, OPEN_READWRITE }= require('sqlite3');
+const { Database, OPEN_READWRITE } = require('sqlite3');
+const { json } = require('express');
 const { hasMasterToken } = require('../middlewares/hasMasterToken');
 const { Response } = require('../objects/response/Response');
 const { close } = require('../utils/close');
@@ -7,9 +8,9 @@ const { close } = require('../utils/close');
 module.exports = {
     path: '/services',
     method: 'post',
-    middlewares: [hasMasterToken],
+    middlewares: [hasMasterToken, json()],
     readRequest: async (req, res) => {
-        if (!req.body || !req.body.name) {
+        if (!req.body || !req.body.name || !req.body.name.length === 0) {
             return res.status(400).json(new Response(false, 'Required variables are: name'));
         }
 
