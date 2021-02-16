@@ -6,7 +6,7 @@ const LIMIT = 3;
 const rateLimitHolder = new Map();
 
 function getIp(req) {
-    return req.headers["x-forwarded-for"] | "localhost";
+    return req.get("x-forwarded-for") | "localhost";
 }
 
 function rateLimit(req) {

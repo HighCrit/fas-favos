@@ -6,7 +6,7 @@ async function hasMasterToken (req, res, next) {
         return res.status(429).json(new Response(false, 'You\'re being ratelimited!'));
     }
 
-    const auth = req.header('Authorization');
+    const auth = req.get('Authorization');
     
     if (auth) {
         const token = auth.replace('Mutual ', '');
