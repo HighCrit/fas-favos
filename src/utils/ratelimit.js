@@ -37,6 +37,7 @@ function isRateLimited(req) {
 
     // Check if ratelimit period has expired
     if (time - entry.lastCall > RATELIMIT_PERIOD) {
+        rateLimitHolder.delete(ip);
         return false;
     }
     
