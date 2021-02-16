@@ -1,6 +1,5 @@
 const consola = require('consola');
 const fileupload = require('express-fileupload');
-const { join } = require('path'); 
 const { authorizedForService } = require("../middlewares/authorizedForService");
 const { Response } = require('../objects/response/Response');
 

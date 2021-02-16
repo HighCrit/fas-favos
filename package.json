@@ -20,6 +20,7 @@
     "consola": "^2.15.2",
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
+    "helmet": "^4.4.1",
     "sqlite3": "^5.0.1",
     "uuid": "^8.3.2"
   },

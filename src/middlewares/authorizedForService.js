@@ -1,9 +1,14 @@
 const consola = require('consola');
 const { Database, OPEN_READWRITE } = require("sqlite3");
 const { Response } = require('../objects/response/Response');
+const { isRateLimited, rateLimit } = require("../utils/ratelimit");
 const { close } = require('../utils/close');
 
 async function authorizedForService(req, res, next) {
+    if (isRateLimited(req)) {
+        return res.status(429).json(new Response(false, 'You\'re being ratelimited!'));
+    }
+
     const auth = req.header('Authorization');
 
     if (auth) {
@@ -22,12 +27,14 @@ async function authorizedForService(req, res, next) {
                 } else if (row) {
                     next();
                 } else {
+                    rateLimit(req);
                     res.status(401).json(new Response(false, 'You are not authorized to perform this action'));
                 }
                 return close(db);
             });
         })
     } else {
+        rateLimit(req);
         return res.status(401).json(new Response(false, 'You are not authorized to perform this action'));
     }
 }

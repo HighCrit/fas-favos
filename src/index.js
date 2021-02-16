@@ -1,5 +1,6 @@
 const express = require('express');
 const consola = require('consola');
+const helmet = require('helmet');
 const { readdirSync, readFileSync } = require('fs');
 const { join } = require('path');
 const { Database } = require('sqlite3');
@@ -32,6 +33,8 @@ const db = new Database(process.env.DB_PATH, async (err) => {
 });
 
 const server = express();
+
+server.use(helmet());
 
 const routes = readdirSync(join(__dirname, 'routes'));
 routes.forEach(route => {
