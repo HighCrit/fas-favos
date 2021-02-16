@@ -1,7 +1,5 @@
 const consola = require('consola');
 const fileupload = require('express-fileupload');
-const { v4: uuidv4 } = require('uuid');
-const { join } = require('path'); 
 const { authorizedForService } = require("../middlewares/authorizedForService");
 const { Response } = require('../objects/response/Response');
 
@@ -26,7 +24,7 @@ module.exports = {
         const uploaded = [];
 
         for (let file of Object.keys(req.files)) { 
-            const path = req.path + '/' + uuidv4() + '.' + req.files[file].name.split('.').pop();
+            const path = req.path + '/' + req.files[file].md5 + '.' + req.files[file].name.split('.').pop();
             try {
                 await req.files[file].mv(process.env.FILES_ROOT + path);
                 uploaded.push(path);
