@@ -6,7 +6,7 @@ const LIMIT = 3;
 const rateLimitHolder = new Map();
 
 function getIp(req) {
-    return req.get("x-forwarded-for") | "localhost";
+    return req.get("x-forwarded-for") || "localhost";
 }
 
 function rateLimit(req) {
@@ -31,7 +31,7 @@ function isRateLimited(req) {
 
     const entry = rateLimitHolder.get(ip);
     // Check if request limit has been exceeded
-    if (entry.amount > LIMIT) {
+    if (entry.amount < LIMIT) {
         return false;
     }
 
