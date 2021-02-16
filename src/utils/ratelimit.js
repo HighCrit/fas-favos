@@ -1,5 +1,5 @@
 const consola = require("consola");
-const { Response } = require("../objects/response/Response");
+const { RateLimitEntry } = require('../objects/RateLimitEntry');
 
 const RATELIMIT_PERIOD = 600000; // 10 minutes
 const LIMIT = 3;
@@ -40,6 +40,7 @@ function isRateLimited(req) {
         return false;
     }
     
+    consola.info('Ratelimited: ' + ip);
     return true;
 }
 
