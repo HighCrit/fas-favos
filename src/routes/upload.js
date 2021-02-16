@@ -27,11 +27,11 @@ module.exports = {
             const path = req.path + '/' + req.files[file].md5 + '.' + req.files[file].name.split('.').pop();
             try {
                 await req.files[file].mv(process.env.FILES_ROOT + path);
-                uploaded.push(path);
+                uploaded.push(process.env.SITE_URL + path);
                 consola.success(`Succesfully uploaded ${req.files[file].name} at ${path}`);
             } catch (err) {
                 consola.error(err);
-                errored.push(process.env.SITE_URL + path);
+                errored.push(path);
             } 
         }
 
