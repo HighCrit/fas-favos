@@ -29,7 +29,7 @@ module.exports = {
             const path = req.path + '/' + uuidv4() + '.' + req.files[file].name.split('.').pop();
             try {
                 await req.files[file].mv(process.env.FILES_ROOT + path);
-                uploaded.push(process.env.SITE_URL + path);
+                uploaded.push(path);
                 consola.success(`Succesfully uploaded ${req.files[file].name} at ${path}`);
             } catch (err) {
                 consola.error(err);
@@ -38,7 +38,7 @@ module.exports = {
         }
 
         if (errored.length !== 0) {
-            return res.status(500).json(new Response(false, errored));
+            return res.status(500).json(new Response(false, `Failed to upload: ${errored.join(', ')}`));
         }
         return res.status(201).json(new Response(true, uploaded));
     }
