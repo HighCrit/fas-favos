@@ -10,3 +10,5 @@ class RateLimitEntry {
         this.lastCall = now;
     }
 }
+
+module.exports = { RateLimitEntry }
